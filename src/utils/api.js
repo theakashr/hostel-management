@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Adjust base URL for production
+  baseURL: 'https://hostelhub-backend-ashen.vercel.app/api', // Vercel backend URL
 });
 
 // Request interceptor to add the auth token to headers
