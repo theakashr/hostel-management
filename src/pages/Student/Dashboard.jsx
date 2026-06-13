@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useStore from '../../store/useStore';
 import api from '../../utils/api';
-import { Users, DollarSign, AlertCircle, Calendar } from 'lucide-react';
+import { Users, DollarSign, AlertCircle, Calendar, QrCode } from 'lucide-react';
 
 const Card = ({ title, value, subtitle, icon: Icon, colorClass, linkTo }) => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
@@ -44,6 +44,7 @@ const StudentDashboard = () => {
   }, []);
 
   if (loading) return <div className="animate-pulse flex space-x-4">Loading dashboard...</div>;
+  if (!data) return <div className="text-red-500 text-center mt-10">Error loading dashboard data. Please try again.</div>;
 
   const { studentDetails, latestFee, pendingComplaints, pendingLeaves } = data;
   const roomName = studentDetails?.roomId ? studentDetails.roomId.roomNumber : 'Unassigned';

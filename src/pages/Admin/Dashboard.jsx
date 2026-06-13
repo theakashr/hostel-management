@@ -45,6 +45,7 @@ const AdminDashboard = () => {
   }, []);
 
   if (loading) return <div>Loading dashboard...</div>;
+  if (!data || !chartData) return <div className="text-red-500 text-center mt-10">Error loading admin dashboard. Please ensure you are logged in as an Admin.</div>;
 
   return (
     <div>
