@@ -12,10 +12,12 @@ import Complaints from './pages/Student/Complaints';
 import Leaves from './pages/Student/Leaves';
 import Passes from './pages/Student/VisitorPasses';
 
-// Placeholder Pages for Admin (we will build these next)
+// Placeholder Pages for Admin
 import AdminDashboard from './pages/Admin/Dashboard';
 import Students from './pages/Admin/Students';
 import RoomAllocation from './pages/Admin/RoomAllocation';
+
+import WardenDashboard from './pages/Warden/Dashboard';
 
 function App() {
   const { loadUser, loading, isAuthenticated, user } = useStore();
@@ -31,11 +33,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to={user.role === 'student' ? '/dashboard' : '/admin/dashboard'} />} />
+        <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to={user.role === 'student' ? '/dashboard' : (user.role === 'warden' ? '/warden/dashboard' : '/admin/dashboard')} />} />
         
         {/* Protected Routes */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to={isAuthenticated ? (user.role === 'student' ? '/dashboard' : '/admin/dashboard') : '/login'} />} />
+          <Route index element={<Navigate to={isAuthenticated ? (user.role === 'student' ? '/dashboard' : (user.role === 'warden' ? '/warden/dashboard' : '/admin/dashboard')) : '/login'} />} />
           
           {/* Student Routes */}
           <Route path="dashboard" element={<StudentDashboard />} />
@@ -50,7 +52,10 @@ function App() {
           <Route path="admin/students" element={<Students />} />
           <Route path="admin/rooms" element={<RoomAllocation />} />
           <Route path="admin/fees" element={<div>Fee Management (Coming Soon)</div>} />
-          <Route path="admin/complaints" element={<div>Admin Complaints (Coming Soon)</div>} />
+          
+          {/* Warden Routes */}
+          <Route path="warden/dashboard" element={<WardenDashboard />} />
+          <Route path="warden/complaints" element={<div>Warden Complaints (Coming Soon)</div>} />
         </Route>
       </Routes>
       {!isAuthenticated && <ToastManager />}

@@ -16,14 +16,19 @@ const Sidebar = () => {
   ];
 
   const adminLinks = [
-    { to: '/admin/dashboard', label: 'Dashboard', icon: Home },
+    { to: '/admin/dashboard', label: 'Admin Dashboard', icon: Home },
     { to: '/admin/students', label: 'Students', icon: Users },
-    { to: '/admin/rooms', label: 'Room Allocation', icon: Users }, // we can use an icon
+    { to: '/admin/rooms', label: 'Room Allocation', icon: Users },
     { to: '/admin/fees', label: 'Fee Management', icon: DollarSign },
-    { to: '/admin/complaints', label: 'Complaints', icon: AlertCircle },
   ];
 
-  const links = user?.role === 'admin' || user?.role === 'warden' ? adminLinks : studentLinks;
+  const wardenLinks = [
+    { to: '/warden/dashboard', label: 'Warden Dashboard', icon: Home },
+    { to: '/warden/complaints', label: 'Complaints', icon: AlertCircle },
+    { to: '/admin/rooms', label: 'Room Allocation', icon: Users },
+  ];
+
+  const links = user?.role === 'admin' ? adminLinks : (user?.role === 'warden' ? wardenLinks : studentLinks);
 
   return (
     <div className="w-64 bg-white border-r border-gray-200 h-screen hidden md:flex flex-col sticky top-0">
