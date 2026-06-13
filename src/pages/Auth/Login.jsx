@@ -13,7 +13,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const result = await login(email, password, role);
+    const loginRole = role === 'warden' ? 'admin' : role;
+    const result = await login(email, password, loginRole);
     setIsLoading(false);
 
     if (result.success) {
